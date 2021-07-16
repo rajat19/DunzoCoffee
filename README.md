@@ -1,6 +1,17 @@
 # DunzoCoffee
 Coffee Maker assignment for Dunzo
 
+## Run application
+```shell
+./gradlew run
+```
+
+## Run tests
+```shell
+./gradlew test
+```
+Result for the test is generated and stored in `./build/reports/index.html`
+
 ## Requirements
 Write the working code to create a working coffee machine. Here are the desired features
 1. It will be serving some beverages.
