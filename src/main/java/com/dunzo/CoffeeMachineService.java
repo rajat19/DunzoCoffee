@@ -28,6 +28,9 @@ public class CoffeeMachineService {
         totalSuccessfulBeverages = 0;
     }
 
+    /**
+     * Start processing of beverages
+     */
     public void startMachine() {
         InventoryManager inventoryManager = InventoryManager.getInstance();
 
@@ -37,13 +40,18 @@ public class CoffeeMachineService {
         Map<String, Map<String, Integer>> beverages = coffeeMachineInput.getMachine().getBeverages();
         beverages.keySet().forEach(key -> {
             Beverage beverage = new Beverage(key, beverages.get(key));
-            addBeverageRequest(beverage);
+            processBeverage(beverage);
         });
     }
 
-    public void addBeverageRequest(Beverage beverage) {
+    /**
+     * Add a new beverage thread in the threadpool
+     * All beverages are checked and processed in parallel
+     * @param beverage The Beverage to be processed
+     */
+    public void processBeverage(Beverage beverage) {
         threadPoolExecutor.execute(() -> {
-            if (InventoryManager.getInstance().inventoryUpdatedForBeverage(beverage)) {
+            if (InventoryManager.getInstance().updateInventoryForBeverage(beverage)) {
                 System.out.println(beverage.getName() + " is prepared");
                 totalSuccessfulBeverages++;
             }

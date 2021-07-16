@@ -26,7 +26,12 @@ public class InventoryManager {
         return inventoryManager;
     }
 
-    public synchronized boolean inventoryUpdatedForBeverage(Beverage beverage) {
+    /**
+     *
+     * @param beverage The Beverage to be processed
+     * @return true if inventory is updated else false
+     */
+    public synchronized boolean updateInventoryForBeverage(Beverage beverage) {
         try {
             checkAndUpdateInventory(beverage);
             return true;
@@ -36,6 +41,12 @@ public class InventoryManager {
         }
     }
 
+    /**
+     *
+     * @param beverage The Beverage to be processed
+     * @throws IngredientNotAvailableException if ingredient not available in inventory
+     * @throws InsufficientIngredientException if sufficient quantity of ingredient not present in inventory
+     */
     public void checkAndUpdateInventory(Beverage beverage) throws IngredientNotAvailableException, InsufficientIngredientException {
         Map<String, Integer> requiredIngredients = beverage.getIngredientsMap();
         for(Map.Entry<String, Integer> entry: requiredIngredients.entrySet()) {
@@ -49,6 +60,7 @@ public class InventoryManager {
             }
         }
 
+        // If beverage can be prepared, remove beverage's ingredients from the inventory
         for(Map.Entry<String, Integer> entry: requiredIngredients.entrySet()) {
             String ingredient = entry.getKey();
             int quantityUsed = entry.getValue();
@@ -61,6 +73,9 @@ public class InventoryManager {
         inventory.put(ingredient, inventory.getOrDefault(ingredient, 0) + quantity);
     }
 
+    /**
+     * used for clearing inventory map (used in testing)
+     */
     public void resetInventory() {
         inventory.clear();
     }

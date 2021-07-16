@@ -5,11 +5,8 @@ import java.io.InputStream;
 
 public class CoffeeMachineApplication {
     public static void main(String[] args) throws IOException {
-        if (args.length < 1) {
-            System.out.println("Input file name required");
-        }
-        InputStream is = CoffeeMachineApplication.class.getResourceAsStream("/test.json");
-        CoffeeMachineService coffeeMachineService = new CoffeeMachineService(is);
+        InputStream inputStream = CoffeeMachineApplication.class.getResourceAsStream("/test.json");
+        CoffeeMachineService coffeeMachineService = new CoffeeMachineService(inputStream);
         coffeeMachineService.startMachine();
         coffeeMachineService.stopMachine();
     }

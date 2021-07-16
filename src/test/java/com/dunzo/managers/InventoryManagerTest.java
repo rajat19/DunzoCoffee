@@ -28,7 +28,7 @@ public class InventoryManagerTest {
         inventoryManager.addInventory("ing2", 50);
         inventoryManager.addInventory("ing3", 10);
 
-        boolean actual = inventoryManager.inventoryUpdatedForBeverage(beverage);
+        boolean actual = inventoryManager.updateInventoryForBeverage(beverage);
         assertTrue(actual);
     }
 
@@ -50,9 +50,9 @@ public class InventoryManagerTest {
         inventoryManager.addInventory("ing2", 50);
         inventoryManager.addInventory("ing3", 10);
 
-        boolean actual1 = inventoryManager.inventoryUpdatedForBeverage(beverage1);
-        boolean actual2 = inventoryManager.inventoryUpdatedForBeverage(beverage2);
-        boolean actual3 = inventoryManager.inventoryUpdatedForBeverage(beverage3);
+        boolean actual1 = inventoryManager.updateInventoryForBeverage(beverage1);
+        boolean actual2 = inventoryManager.updateInventoryForBeverage(beverage2);
+        boolean actual3 = inventoryManager.updateInventoryForBeverage(beverage3);
         assertTrue(actual1);
         assertTrue(actual2);
         assertTrue(actual3);
